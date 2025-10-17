@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nose Balance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: #090b10;
+        color: #f5f7fb;
+        height: 100%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      main {
+        width: min(100vw, 960px);
+        height: min(100vh, 720px);
+        aspect-ratio: 4 / 3;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 24px;
+        padding: 24px;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        letter-spacing: -0.01em;
+      }
+
+      #hud {
+        display: flex;
+        gap: 24px;
+        font-size: 1.125rem;
+      }
+
+      #hud span {
+        font-weight: 600;
+      }
+
+      .canvas-wrap {
+        position: relative;
+        flex: 1;
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(160deg, #1a202e, #090b10);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: #111622;
+      }
+
+      #overlay {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        pointer-events: auto;
+      }
+
+      #overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      #overlay .panel {
+        min-width: 260px;
+        padding: 24px 28px;
+        border-radius: 18px;
+        background: rgba(12, 16, 24, 0.85);
+        backdrop-filter: blur(16px);
+        text-align: center;
+        pointer-events: auto;
+      }
+
+      #overlay .panel h2 {
+        margin: 0 0 12px;
+        font-size: 1.4rem;
+      }
+
+      #overlay .panel p {
+        margin: 0 0 20px;
+        line-height: 1.5;
+        color: rgba(245, 247, 251, 0.75);
+      }
+
+      button {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 0.85rem 1.9rem;
+        cursor: pointer;
+        background: linear-gradient(135deg, #4f8afa, #7a5cff);
+        color: #fff;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+        box-shadow: 0 10px 30px rgba(79, 138, 250, 0.35);
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 36px rgba(94, 92, 255, 0.45);
+      }
+
+      button:focus-visible {
+        outline: 3px solid rgba(110, 141, 255, 0.65);
+        outline-offset: 2px;
+      }
+
+      #status {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: rgba(9, 11, 16, 0.75);
+        font-size: 0.95rem;
+        color: rgba(245, 247, 251, 0.8);
+        pointer-events: none;
+      }
+
+      #status.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      @media (max-width: 900px) {
+        body {
+          padding: 16px;
+        }
+        main {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Nose Balance</h1>
+        <div id="hud">
+          <div>Score: <span id="score">0.0</span>s</div>
+          <div>Best: <span id="best">0.0</span>s</div>
+        </div>
+      </header>
+      <div class="canvas-wrap">
+        <canvas id="view" width="960" height="720"></canvas>
+        <div id="overlay" class="hidden">
+          <div class="panel">
+            <h2 id="overlay-title">Nose Balance</h2>
+            <p id="overlay-body">
+              Balance the ball on the stick by keeping your head steady.
+            </p>
+            <button id="overlay-action">Play</button>
+          </div>
+        </div>
+        <div id="status" class="hidden"></div>
+      </div>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
+
