@@ -21,8 +21,8 @@ const tuning = getTuningParams();
 const config = {
   kL: tuning.kL ?? 1.6,
   kR: tuning.kR ?? 0.11,
-  g: tuning.hard ? 220 : 180,
-  mu: tuning.hard ? 0.993 : 0.995,
+  g: tuning.hard ? 210 : 160,
+  mu: tuning.hard ? 0.994 : 0.997,
   ballEmoji: tuning.ballEmoji ?? null,
 };
 

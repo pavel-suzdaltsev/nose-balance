@@ -84,7 +84,7 @@ export class LandmarkTracker {
 
   update(video, timestamp, phase, dims) {
     const result = this.faceLandmarker.detectForVideo(video, timestamp);
-    const landmarks = result?.faceLandmarks?.[0];
+    const landmarks = result?.landmarks?.[0] || result?.faceLandmarks?.[0];
     if (!landmarks) {
       this.latest = null;
       return null;

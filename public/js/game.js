@@ -1,8 +1,8 @@
 export class Roller {
   constructor(constants = {}) {
     this.constants = {
-      g: 180,
-      mu: 0.995,
+      g: 160,
+      mu: 0.997,
       ...constants,
     };
     this.reset();
@@ -25,7 +25,7 @@ export class Roller {
     if (this.over) return;
 
     const { g, mu } = this.constants;
-    const a = g * Math.sin(slopeRad);
+    const a = -g * Math.sin(slopeRad);
     this.v = (this.v + a * dt) * mu;
     this.x += this.v * dt;
 

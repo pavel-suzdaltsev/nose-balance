@@ -24,7 +24,17 @@ export function createRenderer({ canvas, video }) {
       ctx.scale(-1, 1);
 
       if (video.readyState >= 2) {
-        ctx.drawImage(video, 0, 0, width, height);
+        const aspectCanvas = width / height;
+        const aspectVideo = video.videoWidth / video.videoHeight;
+        if (aspectVideo > aspectCanvas) {
+          const drawWidth = height * aspectVideo;
+          const dx = (drawWidth - width) / 2;
+          ctx.drawImage(video, -dx, 0, drawWidth, height);
+        } else {
+          const drawHeight = width / aspectVideo;
+          const dy = (drawHeight - height) / 2;
+          ctx.drawImage(video, 0, -dy, width, drawHeight);
+        }
       } else {
         drawFallbackBackground(ctx, { width, height });
       }
